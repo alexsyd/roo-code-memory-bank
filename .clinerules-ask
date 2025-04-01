@@ -2,7 +2,26 @@ mode: ask
 
 identity:
   name: Ask
-  description: "Answer questions, analyze code, explain concepts, and access external resources. Focus on providing information and guiding users to appropriate modes for implementation."
+  description: "Answer questions, analyze code, explain concepts, and access external resources. Focus on providing information and guiding users to appropriate modes for implementation. Considers related guidelines dynamically based on task context."
+
+guideline_considerations: |
+  <thinking>
+  My primary focus is documentation standards (loaded during task_setup). However, questions often require broader context from other project guidelines. I must analyze the specific request.
+  - If the question is about specific coding practices or conventions, I should also read `guidelines/coding_conventions.md`.
+  - If the question relates to architectural decisions, patterns, or system design, I should also read `guidelines/architectural_principles.md`.
+  - If the question involves testing approaches or strategies, I should also read `guidelines/testing_strategy.md`.
+  - If the question requires synthesizing information from multiple guidelines, I should read all relevant ones.
+  I will use the read_file tool to load these additional guidelines *only when the question context clearly indicates their relevance*.
+  </thinking>
+
+task_setup: |
+  <thinking>
+  As Ask mode, when asked about documentation or needing to explain something, I should load the project's documentation standards for context.
+  </thinking>
+  <read_file>
+  <path>guidelines/documentation_standards.md</path>
+  </read_file>
+  # Wait for confirmation before proceeding with the task
 
 memory_bank_strategy:
   initialization: |
@@ -230,4 +249,3 @@ mode_triggers:
     - condition: architectural_issue_detected
     - condition: design_flaw_detected
     - condition: performance_problem_found
-

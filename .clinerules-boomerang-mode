@@ -69,29 +69,31 @@ memory_bank_strategy:
 memory_bank_updates:
   frequency: "UPDATE MEMORY BANK THROUGHOUT WORKFLOW ORCHESTRATION."
   activeContext.md:
-    trigger: "When starting a new complex workflow or when the status of active subtasks changes."
-    action: |
+    update_point: "After starting a new complex workflow or after the status of an active subtask changes."
+    logging_requirement: |
       <thinking>
-      I need to update activeContext.md to reflect the current workflow state and subtask status.
+      As Boomerang Mode, I must log the current workflow state and subtask status in activeContext.md at this point.
       </thinking>
-      Use insert_content or apply_diff to update the 'Current Focus' section with the overall workflow and maintain a list of active subtasks and their status. Always include a timestamp.
-    format: "[YYYY-MM-DD HH:MM:SS] - Workflow: [Workflow Name] - Subtask [Subtask ID/Name]: [Status]"
+      Use `insert_content` or `apply_diff` to update the 'Current Focus' section with the overall workflow name/goal and maintain a list of active subtasks and their status (e.g., Delegated, Completed, Failed). Always include a timestamp.
+    log_format_example: "[YYYY-MM-DD HH:MM:SS] - Workflow: [Workflow Name] - Subtask [Subtask ID/Name]: [Status]"
   progress.md:
-    trigger: "When delegating a new subtask or when a subtask is completed."
-    action: |
+    update_point: "After delegating a new subtask or after a subtask completes (successfully or with failure)."
+    logging_requirement: |
       <thinking>
-      I need to update progress.md to track subtask delegation and completion.
+      As Boomerang Mode, I must log the delegation or completion of a subtask in progress.md.
       </thinking>
-      Use insert_content to *append* new entries. When delegating, add to 'Current Tasks'. When completed, move the entry to 'Completed Tasks' and add 'Next Steps' if applicable. Always include a timestamp and summary from the completed subtask's result.
-    format: "[YYYY-MM-DD HH:MM:SS] - Subtask Delegated: [Subtask Name] to [Mode Name] / Subtask Completed: [Subtask Name] by [Mode Name] - Result: [Summary]"
+      Use `insert_content` to *append* new entries.
+      - When delegating: Add an entry to 'Current Tasks' detailing the subtask, target mode, and expected outcome.
+      - When completed: Update the entry (or add a new one) in 'Completed Tasks', including the timestamp, mode, and a summary from the subtask's `attempt_completion` result. Define 'Next Steps' based on the workflow plan.
+    log_format_example: "[YYYY-MM-DD HH:MM:SS] - Subtask Delegated: [Subtask Name] to [Mode Name] / Subtask Completed: [Subtask Name] by [Mode Name] - Result: [Summary]"
   decisionLog.md:
-    trigger: "When making a strategic decision about workflow orchestration (e.g., changing delegation strategy)."
-    action: |
+    update_point: "After making a strategic decision about the workflow orchestration itself (e.g., changing the sequence of subtasks, altering delegation strategy based on results)."
+    logging_requirement: |
       <thinking>
-      I need to log a workflow orchestration decision in decisionLog.md.
+      As Boomerang Mode, I must log significant workflow orchestration decisions in decisionLog.md.
       </thinking>
-      Use insert_content to *append* new decisions, rationale, and implications. Never overwrite existing entries. Always include a timestamp.
-    format: "[YYYY-MM-DD HH:MM:SS] - Workflow Decision: [Decision Summary] - Rationale: [Rationale]"
+      Use `insert_content` to *append* the decision summary, the rationale behind it, and any implications for the workflow. Never overwrite existing entries. Always include a timestamp.
+    log_format_example: "[YYYY-MM-DD HH:MM:SS] - Workflow Decision: [Decision Summary] - Rationale: [Rationale]"
   # Boomerang mode generally reads productContext and systemPatterns but doesn't update them directly.
 
 mode_collaboration: |

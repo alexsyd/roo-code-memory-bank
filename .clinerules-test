@@ -377,46 +377,41 @@ memory_bank_updates:
   frequency:
   - "UPDATE MEMORY BANK THROUGHOUT THE CHAT SESSION, WHEN SIGNIFICANT CHANGES OCCUR IN THE PROJECT."
   decisionLog.md:
-    trigger: "When a significant architectural decision is made (new component, data flow change, technology choice, etc.). Use your judgment to determine significance."
-    action: |
+    update_point: "After making a significant decision regarding testing strategy or approach (e.g., adopting a new testing tool/framework, changing coverage goals)."
+    logging_requirement: |
       <thinking>
-      I need to update decisionLog.md with a decision, the rationale, and any implications. 
+      As Test Mode, I must log significant decisions about the testing strategy in decisionLog.md.
       </thinking>
-      Use insert_content to *append* new information. Never overwrite existing entries. Always include a timestamp.  
-    format: |
-      "[YYYY-MM-DD HH:MM:SS] - [Summary of Change/Focus/Issue]"
+      Use `insert_content` to *append* the decision summary, rationale, and implications. Never overwrite existing entries. Always include a timestamp.
+    log_format_example: "[YYYY-MM-DD HH:MM:SS] - Testing Decision: [Decision Summary] - Rationale: [Rationale]"
   productContext.md:
-    trigger: "When the high-level project description, goals, features, or overall architecture changes significantly. Use your judgment to determine significance."
-    action: |
-      <thinking>
-      A fundamental change has occured which warrants an update to productContext.md.
-      </thinking>
-      Use insert_content to *append* new information or use apply_diff to modify existing entries if necessary. Timestamp and summary of change will be appended as footnotes to the end of the file.
-    format: "[YYYY-MM-DD HH:MM:SS] - [Summary of Change]"
+    # Test mode typically doesn't update productContext directly. Handoff to Architect if testing reveals fundamental requirement issues.
+    # update_point: "If testing reveals a fundamental misunderstanding or necessary change in product scope/goals impacting productContext.md."
+    # logging_requirement: |
+    #   <thinking>As Test Mode, if my findings impact the core product context, I should flag this for Architect Mode.</thinking>
+    #   Suggest switching to Architect Mode to update productContext.md.
   systemPatterns.md:
-    trigger: "When new architectural patterns are introduced or existing ones are modified. Use your judgement."
-    action: |
-      <thinking>
-      I need to update systemPatterns.md with a brief summary and time stamp.
-      </thinking>
-      Use insert_content to *append* new patterns or use apply_diff to modify existing entries if warranted. Always include a timestamp.
-    format: "[YYYY-MM-DD HH:MM:SS] - [Description of Pattern/Change]"
+    # Test mode typically doesn't update systemPatterns directly. Handoff to Architect if testing reveals pattern violations.
+    # update_point: "If testing reveals violations of or requires changes to documented system patterns."
+    # logging_requirement: |
+    #   <thinking>As Test Mode, if my findings impact documented system patterns, I should flag this for Architect Mode.</thinking>
+    #   Suggest switching to Architect Mode to update systemPatterns.md.
   activeContext.md:
-    trigger: "When the current focus of work changes, or when significant progress is made. Use your judgement."
-    action: |
+    update_point: "After the focus of testing work changes (e.g., starting tests for a new feature), or when significant testing milestones are reached (e.g., test suite execution completed)."
+    logging_requirement: |
       <thinking>
-      I need to update activeContext.md with a brief summary and time stamp.
+      As Test Mode, I must log changes in testing focus or significant milestones in activeContext.md.
       </thinking>
-      Use insert_content to *append* to the relevant section (Current Focus, Recent Changes, Open Questions/Issues) or use apply_diff to modify existing entries if warranted.  Always include a timestamp.
-    format: "[YYYY-MM-DD HH:MM:SS] - [Summary of Change/Focus/Issue]"
+      Use `insert_content` to *append* to the relevant section (Current Focus, Recent Changes, Open Questions/Issues). Always include a timestamp.
+    log_format_example: "[YYYY-MM-DD HH:MM:SS] - Testing Update: [Summary of Focus/Milestone]"
   progress.md:
-      trigger: "When a task begins, is completed, or if there are any changes Use your judgement."
-      action: |
+      update_point: "After a testing task (e.g., writing tests for feature X, executing regression suite) begins, is completed, or its status changes."
+      logging_requirement: |
         <thinking>
-        I need to update progress.md with a brief summary and time stamp.
+        As Test Mode, I must log the status of testing tasks in progress.md.
         </thinking>
-        Use insert_content to *append* the new entry, never overwrite existing entries. Always include a timestamp.
-      format: "[YYYY-MM-DD HH:MM:SS] - [Summary of Change/Focus/Issue]"
+        Use `insert_content` to *append* the new entry (e.g., under 'Current Tasks' or 'Completed Tasks'). Never overwrite existing entries. Always include a timestamp.
+      log_format_example: "[YYYY-MM-DD HH:MM:SS] - Testing Progress: [Summary of Task Status Change]"
 
 umb:
   trigger: "^(Update Memory Bank|UMB)$"

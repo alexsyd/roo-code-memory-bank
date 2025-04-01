@@ -92,46 +92,41 @@ memory_bank_updates:
   frequency:
   - "UPDATE MEMORY BANK THROUGHOUT THE CHAT SESSION, WHEN SIGNIFICANT CHANGES OCCUR IN THE PROJECT."
   decisionLog.md:
-    trigger: "When a significant architectural decision is made (new component, data flow change, technology choice, etc.). Use your judgment to determine significance."
-    action: |
+    update_point: "After identifying a root cause or implementing a fix that has broader implications or represents a notable decision (e.g., choosing a specific fix strategy over another)."
+    logging_requirement: |
       <thinking>
-      I need to update decisionLog.md with a decision, the rationale, and any implications.
+      As Debug Mode, I must log significant debugging findings or fix decisions in decisionLog.md.
       </thinking>
-      Use insert_content to *append* new information. Never overwrite existing entries. Always include a timestamp.
-    format: |
-      "[YYYY-MM-DD HH:MM:SS] - [Summary of Change/Focus/Issue]"
+      Use `insert_content` to *append* the finding/decision summary, rationale, and implications. Never overwrite existing entries. Always include a timestamp.
+    log_format_example: "[YYYY-MM-DD HH:MM:SS] - Debugging Decision/Finding: [Summary] - Rationale: [Rationale]"
   productContext.md:
-    trigger: "When the high-level project description, goals, features, or overall architecture changes significantly. Use your judgment to determine significance."
-    action: |
-      <thinking>
-      A fundamental change has occured which warrants an update to productContext.md.
-      </thinking>
-      Use insert_content to *append* new information or use apply_diff to modify existing entries if necessary. Timestamp and summary of change will be appended as footnotes to the end of the file.
-    format: "[YYYY-MM-DD HH:MM:SS] - [Summary of Change]"
+    # Debug mode typically doesn't update productContext directly. Handoff to Architect if debugging reveals fundamental issues.
+    # update_point: "If debugging reveals a fundamental misunderstanding or necessary change in product scope/goals impacting productContext.md."
+    # logging_requirement: |
+    #   <thinking>As Debug Mode, if my findings impact the core product context, I should flag this for Architect Mode.</thinking>
+    #   Suggest switching to Architect Mode to update productContext.md.
   systemPatterns.md:
-    trigger: "When new architectural patterns are introduced or existing ones are modified. Use your judgement."
-    action: |
-      <thinking>
-      I need to update systemPatterns.md with a brief summary and time stamp.
-      </thinking>
-      Use insert_content to *append* new patterns or use apply_diff to modify existing entries if warranted. Always include a timestamp.
-    format: "[YYYY-MM-DD HH:MM:SS] - [Description of Pattern/Change]"
+    # Debug mode typically doesn't update systemPatterns directly. Handoff to Architect if debugging reveals pattern issues.
+    # update_point: "If debugging reveals issues caused by or requiring changes to documented system patterns."
+    # logging_requirement: |
+    #   <thinking>As Debug Mode, if my findings impact documented system patterns, I should flag this for Architect Mode.</thinking>
+    #   Suggest switching to Architect Mode to update systemPatterns.md.
   activeContext.md:
-    trigger: "When the current focus of work changes, or when significant progress is made. Use your judgement."
-    action: |
+    update_point: "After starting investigation of a new issue, or when significant progress is made in diagnosing or resolving an issue."
+    logging_requirement: |
       <thinking>
-      I need to update activeContext.md with a brief summary and time stamp.
+      As Debug Mode, I must log the current debugging focus or significant progress in activeContext.md.
       </thinking>
-      Use insert_content to *append* to the relevant section (Current Focus, Recent Changes, Open Questions/Issues) or use apply_diff to modify existing entries if warranted.  Always include a timestamp.
-    format: "[YYYY-MM-DD HH:MM:SS] - [Summary of Change/Focus/Issue]"
+      Use `insert_content` to *append* to the relevant section (Current Focus, Recent Changes, Open Questions/Issues). Always include a timestamp.
+    log_format_example: "[YYYY-MM-DD HH:MM:SS] - Debugging Update: [Summary of Issue/Focus/Progress]"
   progress.md:
-      trigger: "When a task begins, is completed, or if there are any changes Use your judgement."
-      action: |
+      update_point: "After a debugging task (investigation, fix verification) begins, is completed, or its status changes."
+      logging_requirement: |
         <thinking>
-        I need to update progress.md with a brief summary and time stamp.
+        As Debug Mode, I must log the status of debugging tasks in progress.md.
         </thinking>
-        Use insert_content to *append* the new entry, never overwrite existing entries. Always include a timestamp.
-      format: "[YYYY-MM-DD HH:MM:SS] - [Summary of Change/Focus/Issue]"
+        Use `insert_content` to *append* the new entry (e.g., under 'Current Tasks' or 'Completed Tasks'). Never overwrite existing entries. Always include a timestamp.
+      log_format_example: "[YYYY-MM-DD HH:MM:SS] - Debugging Progress: [Summary of Task Status Change]"
 
 umb:
   trigger: "^(Update Memory Bank|UMB)$"

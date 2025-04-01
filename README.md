@@ -32,6 +32,7 @@ graph LR
     C --> J[Ask]
     C --> K1[Debug]
     C --> K2[Test]
+    C --> K3[Boomerang]
     K[Real-time Updates] --> B
     K --> L[Continuous Sync]
     L --> M[Auto-save]
@@ -57,6 +58,7 @@ Download and copy these files to your project's **root** directory:
 | Debug | [`.clinerules-debug`](https://github.com/GreatScottyMac/roo-code-memory-bank/blob/main/.clinerules-debug) | Troubleshooting and problem-solving |
 | Test | [`.clinerules-test`](https://github.com/GreatScottyMac/roo-code-memory-bank/blob/main/.clinerules-test) | Test-driven development and quality assurance |
 | Mode | [`.roomodes`](https://github.com/GreatScottyMac/roo-code-memory-bank/blob/main/.roomodes) | Custom mode configuration file for Test mode |
+| Boomerang | `.clinerules-boomerang-mode` | Workflow orchestration and task delegation |
 
 > 📝 **Special Note for Test Mode**: Test mode requires both the [`.clinerules-test`](https://github.com/GreatScottyMac/roo-code-memory-bank/blob/main/.clinerules-test) file AND [`.roomodes`](https://github.com/GreatScottyMac/roo-code-memory-bank/blob/main/.roomodes) file in your project root for proper functionality.
 
@@ -88,6 +90,7 @@ project-root/
 ├── .clinerules-ask
 ├── .clinerules-debug
 ├── .clinerules-test
+├── .clinerules-boomerang-mode
 ├── .roomodes
 ├── memory-bank/
 │   ├── activeContext.md
@@ -150,11 +153,13 @@ graph LR
     D[Ask Mode] -->|Real-time Insights| B
     F[Debug Mode] -->|Real-time Analysis| B
     G[Test Mode] -->|Real-time Testing| B
+    H[Boomerang Mode] -->|Workflow Orchestration| B
     B -->|Instant Context| A
     B -->|Instant Context| C
     B -->|Instant Context| D
     B -->|Instant Context| F
     B -->|Instant Context| G
+    B -->|Instant Context| H
     E[Event Monitor] -->|Continuous Sync| B
 ```
 - Mode-based operation for specialized tasks
@@ -368,6 +373,43 @@ Switch to Test mode when you need to:
 - Analyze test coverage
 - Validate code quality
 - Document test results
+
+### Boomerang Mode
+Roo Code Memory Bank's Boomerang Mode acts as a strategic workflow orchestrator. It excels at breaking down complex tasks into manageable subtasks and delegating them to the most appropriate specialized modes.
+
+#### Key Capabilities
+- 🧩 **Task Decomposition**: Break down complex problems into logical subtasks.
+- 🚀 **Task Delegation**: Assign subtasks to specialized modes (`Code`, `Architect`, `Ask`, `Debug`, `Test`) using the `new_task` tool.
+- 📊 **Workflow Management**: Track the progress of delegated subtasks.
+- 🔄 **Contextual Handoff**: Provide necessary context to subtasks and synthesize results upon completion.
+- 🤔 **Workflow Optimization**: Suggest improvements based on subtask outcomes.
+
+#### Real-time Update Triggers
+Boomerang mode actively monitors and updates Memory Bank files based on:
+- 🏁 Workflow initiation and completion.
+- ⏳ Subtask delegation and status changes.
+- 🎯 Strategic decisions regarding workflow orchestration.
+
+#### Memory Bank Integration
+```mermaid
+graph TD
+    A[Boomerang Mode] --> B[Task Delegation]
+    A --> C[Workflow Tracking]
+    B --> D[Memory Bank Updates]
+    C --> D
+    D --> E[activeContext.md]
+    D --> F[progress.md]
+    D --> G[decisionLog.md]
+    E --> H[Current Workflow Status]
+    F --> I[Subtask Progress]
+    G --> J[Workflow Decisions]
+```
+
+Switch to Boomerang mode when you need to:
+- Manage complex tasks involving multiple steps or modes.
+- Orchestrate a sequence of operations across different specializations.
+- Break down large problems into smaller, delegable units.
+- Ensure context is maintained throughout a multi-stage workflow.
 
 ### Session Management
 - ⚡ **Real-time Updates**: Memory Bank automatically stays synchronized with your work

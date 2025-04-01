@@ -20,6 +20,7 @@ flowchart TD
     C --> C2[Code Mode]
     C --> C3[Ask Mode]
     C --> C4[Debug Mode]
+    C --> C5[Boomerang Mode]
     
     D --> D1[.clinerules Files]
     D --> D2[Mode Switching]
@@ -110,6 +111,15 @@ The Memory Bank system consists of a `memory-bank/` directory containing core an
      - Root cause identification
      - Diagnostic tooling
    - File Access: Read-only
+   
+   5. **Boomerang Mode**
+      - Purpose: Workflow orchestration and task delegation
+      - Capabilities:
+        - Task decomposition
+        - Task delegation via `new_task`
+        - Workflow management
+        - Contextual handoff and result synthesis
+      - File Access: Read access to Memory Bank, Write access via tools (`insert_content`, `apply_diff`) to update Memory Bank files (`activeContext.md`, `progress.md`, `decisionLog.md`).
 
 ### Intelligent Mode Switching
 
@@ -127,6 +137,18 @@ stateDiagram-v2
     Debug --> Code : Fix Implementation
     Debug --> Ask : Documentation Reference
     Debug --> Architect : System Design Review
+    [*] --> Boomerang : Complex Task / Orchestration Needed
+    Boomerang --> Code : Delegate Subtask (new_task)
+    Boomerang --> Architect : Delegate Subtask (new_task)
+    Boomerang --> Ask : Delegate Subtask (new_task)
+    Boomerang --> Debug : Delegate Subtask (new_task)
+    Boomerang --> Test : Delegate Subtask (new_task)
+    Code --> Boomerang : Subtask Complete (attempt_completion)
+    Architect --> Boomerang : Subtask Complete (attempt_completion)
+    Ask --> Boomerang : Subtask Complete (attempt_completion)
+    Debug --> Boomerang : Subtask Complete (attempt_completion)
+    Test --> Boomerang : Subtask Complete (attempt_completion)
+    Boomerang --> [*] : Workflow Complete (attempt_completion)
 ```
 
 The system supports intelligent mode switching based on both prompt analysis and operational needs:
@@ -163,6 +185,8 @@ The system supports intelligent mode switching based on both prompt analysis and
            - what
            - how
            - why
+                    # Note: Boomerang mode is typically triggered by user request or handoff, not simple keywords.
+                    # It uses new_task for delegation rather than relying on intent triggers for its core function.
    ```
 
 2. **Operational Triggers**:
@@ -205,6 +229,12 @@ The system supports intelligent mode switching based on both prompt analysis and
    - Read-only access settings
    - Diagnostic tool permissions
    - Logging and tracing configurations
+   
+   5. **.clinerules-boomerang-mode**
+      - Workflow orchestration rules
+      - Task delegation permissions (`new_task`)
+      - Memory Bank update rules (`activeContext.md`, `progress.md`, `decisionLog.md`)
+      - Tool access permissions (`read_file`, `list_files`, `insert_content`, `apply_diff`, etc.)
 
 ### File Organization
 
@@ -214,6 +244,7 @@ project-root/
 ├── .clinerules-code
 ├── .clinerules-ask
 ├── .clinerules-debug
+├── .clinerules-boomerang-mode
 ├── memory-bank/
 │   ├── activeContext.md
 │   ├── productContext.md

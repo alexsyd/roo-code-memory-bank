@@ -1,5 +1,12 @@
 # Progress Log
 
+## 2025-04-01: New Boomerang Mode for Workflow Orchestration
+
+- Added Boomerang Mode definition to `.roomodes`.
+- Created Boomerang Mode configuration file (`.clinerules-boomerang-mode`).
+- Defined Memory Bank integration strategy for Boomerang Mode (tracking workflows in `activeContext.md`, `progress.md`, and `decisionLog.md`).
+- Updated `README.md` and `developer-primer.md` to include documentation for Boomerang Mode.
+
 ## 2025-03-04: New Test Mode
 
 - Added Test mode configuration (.clinerules-test)

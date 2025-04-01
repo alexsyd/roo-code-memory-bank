@@ -292,3 +292,35 @@ Evolutionary architecture provides a pragmatic approach to system design in a wo
 The key to successful evolutionary architecture lies in balancing flexibility with guidance—creating systems that can adapt to changing requirements while ensuring that important architectural characteristics are preserved. This balance is achieved through a combination of technical practices, organizational structures, and cultural values that support continuous learning and improvement.
 
 As software systems become increasingly central to business success, the ability to evolve architecture in response to changing needs becomes a critical competitive advantage. Evolutionary architecture provides a framework for achieving this adaptability while maintaining the quality and integrity of the system.
+
+## Standard Design Principles
+
+### SOLID Principles
+SOLID is an acronym for five design principles intended to make software designs more understandable, flexible, and maintainable.
+- **Single Responsibility Principle (SRP):** A class should have only one reason to change, meaning it should have only one job or responsibility.
+- **Open/Closed Principle (OCP):** Software entities (classes, modules, functions, etc.) should be open for extension but closed for modification.
+- **Liskov Substitution Principle (LSP):** Subtypes must be substitutable for their base types without altering the correctness of the program.
+- **Interface Segregation Principle (ISP):** Clients should not be forced to depend on interfaces they do not use. Prefer smaller, specific interfaces over large, general-purpose ones.
+- **Dependency Inversion Principle (DIP):** High-level modules should not depend on low-level modules. Both should depend on abstractions (e.g., interfaces). Abstractions should not depend on details. Details should depend on abstractions.
+
+### KISS (Keep It Simple, Stupid)
+This principle advocates for simplicity in design. Avoid unnecessary complexity; simpler solutions are generally easier to understand, maintain, and debug.
+
+### YAGNI (You Ain't Gonna Need It)
+Implement functionality only when you actually need it, not when you just foresee that you might need it in the future. Avoid adding features based on speculation.
+
+### DRY (Don't Repeat Yourself)
+Every piece of knowledge or logic must have a single, unambiguous, authoritative representation within a system. Avoid duplicating code or data; instead, abstract and reuse.
+
+### Law of Demeter (Principle of Least Knowledge)
+A module should have limited knowledge about other modules: only modules "closely" related to the current module. In practice, an object should only call methods of:
+- Itself
+- Its parameters
+- Any objects it creates/instantiates
+- Its direct component objects
+
+### Composition over Inheritance
+Favor composing objects (combining simpler objects to create more complex ones) over inheriting from a base class. Composition often leads to more flexible and maintainable designs than deep inheritance hierarchies.
+
+### Separation of Concerns (SoC)
+Divide a system into distinct sections, such that each section addresses a separate concern (a set of information that affects the code). This promotes modularity, making the system easier to manage and evolve. Examples include separating UI, business logic, and data access.

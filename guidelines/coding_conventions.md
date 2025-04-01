@@ -31,6 +31,20 @@ While we leverage various architectural patterns (Microservices, Serverless, DDD
     *   Model concepts clearly as Entities, Value Objects, and Aggregates.
     *   Use Domain Events to represent significant state changes.
 
+## Core Design Principles in Code
+
+Beyond specific paradigms, fundamental design principles should guide implementation details. These ensure code is maintainable, flexible, and understandable. (See `guidelines/architectural_principles.md` for more detailed explanations).
+
+*   **SOLID:** Apply these object-oriented design principles to classes and functions to promote modularity and reduce coupling.
+    *   **S**ingle Responsibility: Each module (class, function) should have one reason to change.
+    *   **O**pen/Closed: Software entities should be open for extension but closed for modification.
+    *   **L**iskov Substitution: Subtypes must be substitutable for their base types without altering correctness.
+    *   **I**nterface Segregation: Clients should not be forced to depend on interfaces they do not use.
+    *   **D**ependency Inversion: Depend on abstractions, not concretions.
+*   **KISS (Keep It Simple, Stupid):** Prefer straightforward, simple solutions over complex ones whenever possible. Avoid unnecessary complexity in logic, structure, and algorithms.
+*   **YAGNI (You Ain't Gonna Need It):** Do not add functionality, parameters, or complexity until it is actually required by the current needs. Avoid speculative features.
+*   **DRY (Don't Repeat Yourself):** Avoid duplicating code blocks or logic. Abstract common functionality into reusable functions, classes, or modules.
+
 ## Naming Conventions
 
 * (Details to be defined) *
